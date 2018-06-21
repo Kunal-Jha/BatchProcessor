@@ -12,5 +12,6 @@ target/
 
 # Project-based exclusions
 **/.clover/
+*.txt
 
 /target/

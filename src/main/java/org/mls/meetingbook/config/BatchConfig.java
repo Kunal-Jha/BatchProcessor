@@ -46,8 +46,8 @@ public class BatchConfig {
 
 	@Bean
 	@StepScope
-	public Reader reader(@Value("#{jobParameters[meetingRequests]}") String meetingRequests) {
-		return new Reader(meetingRequests);
+	public Reader reader(@Value("#{jobParameters[file]}") String file) {
+		return new Reader(file);
 	}
 
 	@Bean

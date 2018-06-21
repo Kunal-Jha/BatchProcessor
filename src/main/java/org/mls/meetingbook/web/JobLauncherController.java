@@ -1,5 +1,9 @@
 package org.mls.meetingbook.web;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
@@ -26,6 +30,8 @@ public class JobLauncherController {
 	public static String result;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	public static String data;
+
 	/**
 	 * @return the result
 	 */
@@ -33,20 +39,18 @@ public class JobLauncherController {
 		return result;
 	}
 
-	/**
-	 * @param result
-	 *            the result to set
-	 */
-	public void setResult(String result) {
-		JobLauncherController.result = result;
-	}
-
 	@RequestMapping(value = "/timetable-creation", method = RequestMethod.PUT, consumes = "text/plain")
 	public String setMeetingRequest(@RequestBody String meetingRequests) throws Exception {
 		result = "";
+		File inputFile = new File("input.txt");
+		FileWriter fileWriter = new FileWriter(inputFile, false);
 		String[] dateMessage = meetingRequests.trim().split("\\R", 2);
+		logger.info("File Written");
+		fileWriter.write(dateMessage[1]);
+
+		fileWriter.close();
 		try {
-			jobLauncher.run(job, getJobParameters(dateMessage[1], dateMessage[0]));
+			jobLauncher.run(job, getJobParameters(dateMessage[0]));
 		} catch (Exception e) {
 			logger.info(e.getMessage());
 		}
@@ -55,10 +59,10 @@ public class JobLauncherController {
 		return JobLauncherController.result;
 	}
 
-	public JobParameters getJobParameters(String meetingRequests, String businessHours) {
+	public JobParameters getJobParameters(String businessHours) {
 		JobParametersBuilder jobParametersBuilder = new JobParametersBuilder();
 		jobParametersBuilder.addString("bussinessHours", businessHours);
-		jobParametersBuilder.addString("meetingRequests", meetingRequests);
+		jobParametersBuilder.addString("file", "input.txt");
 		jobParametersBuilder.addLong("time", System.currentTimeMillis());
 		return jobParametersBuilder.toJobParameters();
 	}
