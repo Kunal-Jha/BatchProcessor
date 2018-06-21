@@ -55,6 +55,7 @@ public class BatchConfig {
 	public MeetingProcessor processor(@Value("#{jobParameters[bussinessHours]}") String openingHours) {
 		return new MeetingProcessor(openingHours);
 	}
+
 	@Bean
 	public Job importUserJob(JobCompletionNotificationListener listener, Step step1) {
 		return jobBuilderFactory.get("writeToDB").incrementer(new RunIdIncrementer()).listener(listener).flow(step1)
