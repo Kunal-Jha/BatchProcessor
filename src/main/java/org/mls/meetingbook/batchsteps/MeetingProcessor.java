@@ -54,4 +54,34 @@ public class MeetingProcessor implements ItemProcessor<String, Meeting> {
 		return workCal.getTimeInMillis() - meetingCal.getTimeInMillis();
 	}
 
+	/**
+	 * @return the openTime
+	 */
+	public Date getOpenTime() {
+		return openTime;
+	}
+
+	/**
+	 * @param openTime
+	 *            the openTime to set
+	 */
+	public void setOpenTime(Date openTime) {
+		this.openTime = openTime;
+	}
+
+	/**
+	 * @return the closeTime
+	 */
+	public Date getCloseTime() {
+		return closeTime;
+	}
+
+	/**
+	 * @param closeTime
+	 *            the closeTime to set
+	 */
+	public void setCloseTime(Date closeTime) {
+		this.closeTime = closeTime;
+	}
+
 }

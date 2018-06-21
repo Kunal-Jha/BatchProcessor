@@ -18,11 +18,11 @@ public class Meeting {
 	Timestamp endTime;
 
 	public Meeting(String registerTime, String empId, String startTime, int duration) {
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		DateFormat format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		try {
-			this.registerTime = new Timestamp(df.parse(registerTime).getTime());
-			this.startTime = new Timestamp(df1.parse(startTime).getTime());
+			this.registerTime = new Timestamp(format.parse(registerTime).getTime());
+			this.startTime = new Timestamp(format2.parse(startTime).getTime());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

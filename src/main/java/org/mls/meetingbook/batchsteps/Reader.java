@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -32,12 +33,18 @@ public class Reader implements ItemReader<String> {
 
 	}
 
+	// For Test Cases
+	public Reader(String text, boolean Test) {
+		String[] elements = text.split("\n");
+		this.messages = Arrays.asList(elements);
+	}
+
 	int count = 0;
 
 	@Override
 	public String read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
 		if (count < messages.size())
-			return messages.get(count++);
+			return messages.get(count++).trim();
 		else
 			count = 0;
 		return null;
