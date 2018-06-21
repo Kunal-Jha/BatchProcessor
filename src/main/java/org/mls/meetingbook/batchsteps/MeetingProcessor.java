@@ -9,6 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
 
+/**
+ * @author Kunal
+ * 
+ *         Class to handle processing of string to Meeting objects while
+ *         checking working hours.
+ */
 public class MeetingProcessor implements ItemProcessor<String, Meeting> {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	Date openTime;

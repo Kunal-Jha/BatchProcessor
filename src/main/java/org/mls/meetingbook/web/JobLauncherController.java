@@ -1,7 +1,7 @@
 package org.mls.meetingbook.web;
 
 import java.io.File;
-import java.io.FileOutputStream;
+
 import java.io.FileWriter;
 
 import org.slf4j.Logger;
@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author Kunal Controller Class to deal with the client.
+ */
 @EnableScheduling
 @RestController
 public class JobLauncherController {
@@ -39,6 +42,13 @@ public class JobLauncherController {
 		return result;
 	}
 
+	/*
+	 * 
+	 * Controller function to interact with client and handle RequestBody to
+	 * initiate batch Job
+	 */
+	// TODO: On closing the service delte all the temp files.
+	// TODO: Return Json instead of String.
 	@RequestMapping(value = "/timetable-creation", method = RequestMethod.PUT, consumes = "text/plain")
 	public String setMeetingRequest(@RequestBody String meetingRequests) throws Exception {
 		result = "";
@@ -59,6 +69,7 @@ public class JobLauncherController {
 		return JobLauncherController.result;
 	}
 
+	// Setting parmaters for the job.
 	public JobParameters getJobParameters(String businessHours) {
 		JobParametersBuilder jobParametersBuilder = new JobParametersBuilder();
 		jobParametersBuilder.addString("bussinessHours", businessHours);

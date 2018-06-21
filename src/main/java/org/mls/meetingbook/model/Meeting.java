@@ -8,7 +8,8 @@ import java.sql.Timestamp;
 
 /**
  * @author Kunal
- *
+ * 
+ *         Model Class to store all the Meeting objects
  */
 public class Meeting {
 	Timestamp registerTime;
@@ -24,13 +25,11 @@ public class Meeting {
 			this.registerTime = new Timestamp(format.parse(registerTime).getTime());
 			this.startTime = new Timestamp(format2.parse(startTime).getTime());
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.duration = duration;
 		this.empId = empId;
 		this.endTime = new Timestamp(this.startTime.getTime() + this.duration * 3600 * 1000);
-
 	}
 
 	public Meeting(Timestamp registerTime, String empId, Timestamp startTime, Timestamp endTime) {

@@ -17,6 +17,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Kunal
+ * 
+ *         Class to handle post batch writing process, update of DB and return
+ *         of Results.
+ */
 @Component
 public class JobCompletionNotificationListener extends JobExecutionListenerSupport {
 
@@ -33,6 +39,7 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 	@Override
 	public void afterJob(JobExecution jobExecution) {
 		if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
+			//TODO: Develop a more efficient way to update DB
 			List<Meeting> existingMeetings = jdbcTemplate.query(SELECT_QUERY, (rs,
 					row) -> new Meeting(rs.getTimestamp(1), rs.getString(2), rs.getTimestamp(3), rs.getTimestamp(4)));
 			List<Meeting> confirmedMeeting = new ArrayList<Meeting>();
@@ -100,7 +107,8 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 						log.info("Found <" + meeting.toString() + "> in the database.");
 					});
 
-		}
+		} else if (jobExecution.getStatus() == BatchStatus.FAILED)
+			log.error("BATCH JOB FAILED");
 	}
 
 }

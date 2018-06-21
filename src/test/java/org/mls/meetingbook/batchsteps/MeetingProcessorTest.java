@@ -19,8 +19,6 @@ public class MeetingProcessorTest {
 
 	@Before
 	public void setUp() throws Exception {
-		String items = "\n " + "2018-05-16 12:34:56 EMP002 2018-05-21 09:00 2\n"
-				+ "2018-05-16 09:28:23 EMP003 2018-05-22 14:00 2";
 		processor = mock(MeetingProcessor.class);
 		processor1 = new MeetingProcessor("0900 1730");
 		SimpleDateFormat parser = new SimpleDateFormat("HHmm");

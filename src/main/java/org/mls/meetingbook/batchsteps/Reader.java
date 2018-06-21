@@ -15,6 +15,11 @@ import org.springframework.batch.item.NonTransientResourceException;
 import org.springframework.batch.item.ParseException;
 import org.springframework.batch.item.UnexpectedInputException;
 
+/**
+ * @author Kunal
+ * 
+ *         Class to handle reading of Strings from the input file.
+ */
 public class Reader implements ItemReader<String> {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	List<String> messages = new ArrayList<String>();
