@@ -23,19 +23,36 @@ public class JobLauncherController {
 
 	@Autowired
 	Job job;
-	String result = "Default";
+	public static String result;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	/**
+	 * @return the result
+	 */
+	public String getResult() {
+		return result;
+	}
+
+	/**
+	 * @param result
+	 *            the result to set
+	 */
+	public void setResult(String result) {
+		JobLauncherController.result = result;
+	}
 
 	@RequestMapping(value = "/timetable-creation", method = RequestMethod.PUT, consumes = "text/plain")
 	public String setMeetingRequest(@RequestBody String meetingRequests) throws Exception {
+		result = "";
 		String[] dateMessage = meetingRequests.trim().split("\\R", 2);
 		try {
 			jobLauncher.run(job, getJobParameters(dateMessage[1], dateMessage[0]));
 		} catch (Exception e) {
 			logger.info(e.getMessage());
 		}
-
-		return result;
+		if (JobLauncherController.result == "")
+			return "Default";
+		return JobLauncherController.result;
 	}
 
 	public JobParameters getJobParameters(String meetingRequests, String businessHours) {

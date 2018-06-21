@@ -1,2 +1,3 @@
-mvn package
-java -jar target/CSVParser-0.1.0.jar
+mvn package clean install
+
+java -jar target/MeetingRoomBooking-0.1.0.jar

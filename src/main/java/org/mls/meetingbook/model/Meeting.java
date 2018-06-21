@@ -33,11 +33,11 @@ public class Meeting {
 
 	}
 
-	public Meeting(Timestamp registerTime, String empId, Timestamp startTime, int durationOfMeeting) {
+	public Meeting(Timestamp registerTime, String empId, Timestamp startTime, Timestamp endTime) {
 		this.registerTime = registerTime;
 		this.startTime = startTime;
-		this.duration = durationOfMeeting;
 		this.empId = empId;
+		this.endTime = endTime;
 	}
 
 	/**
@@ -94,8 +94,7 @@ public class Meeting {
 
 	@Override
 	public String toString() {
-		return "Meeting [registerTime=" + registerTime + ", empId=" + empId + ", duration=" + duration + ", startTime="
-				+ startTime + ", endTime=" + endTime + "]";
+		return startTime + "  " + endTime + "  " + empId;
 	}
 
 	/**

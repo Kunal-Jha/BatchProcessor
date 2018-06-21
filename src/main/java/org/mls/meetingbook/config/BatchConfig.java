@@ -57,13 +57,13 @@ public class BatchConfig {
 	}
 	@Bean
 	public Job importUserJob(JobCompletionNotificationListener listener, Step step1) {
-		return jobBuilderFactory.get("importUserJob").incrementer(new RunIdIncrementer()).listener(listener).flow(step1)
+		return jobBuilderFactory.get("writeToDB").incrementer(new RunIdIncrementer()).listener(listener).flow(step1)
 				.end().build();
 	}
 
 	@Bean
 	public Step step1(JdbcBatchItemWriter<Meeting> writer) {
-		return stepBuilderFactory.get("step1").<String, Meeting>chunk(5).reader(reader(OVERRIDDEN_BY_EXPRESSION))
+		return stepBuilderFactory.get("step1").<String, Meeting>chunk(200).reader(reader(OVERRIDDEN_BY_EXPRESSION))
 				.processor(processor(OVERRIDDEN_BY_EXPRESSION)).writer(writer).build();
 	}
 
